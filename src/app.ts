@@ -46,11 +46,11 @@ class Cards {
   ) {
     this.displayTotal = displayTotal;
     this.totalCards = displayTotal;
-
     this.cards = cards;
     this.contentHolder = contentHolder;
     this.moreBtn = document.getElementById('more') as HTMLButtonElement;
     this.less = document.getElementById('less') as HTMLButtonElement;
+
     this.moreBtn.addEventListener('click', this.loadMore.bind(this));
     this.less.addEventListener('click', this.loadLess.bind(this));
     this.updateCardContent(this.cards.slice(0, this.totalCards));
@@ -95,34 +95,39 @@ class Cards {
     this.updateCardContent(this.cards.slice(0, this.displayTotal));
   }
 
-  private cardFun(data: any[]): void {
+  private cardFun(data: ICards[]): void {
     data.forEach((card) => {
-      const currentItem = card;
-      const address = currentItem.address;
-      const company = currentItem.company;
+      const {
+        name,
+        username,
+        address: { street, suite, city, zipcode },
+        company: { name: companyName, catchPhrase },
+        phone,
+        email,
+        website,
+      } = card;
+
       this.cardBase += `
-      <div class="card">
-        <div class='head'>
-        <h2>${currentItem.name}</h2>
-        <span>"${currentItem.username}"</span>
+    <div class="card">
+      <div class='head'>
+        <h2>${name}</h2>
+        <span>"${username}"</span>
+      </div>
+      <div class="content-info">
+        <div><p>${street} ${suite} ${city} ${zipcode}</p></div>
+        <div>
+          <h3>${companyName}</h3>
+          <p>${catchPhrase}</p>
+          <p>${phone}</p>
+          <p>${email}</p>
+          <p><a href=${website} target="_blank">${website}</a></p>
         </div>
-        <div class="content-info">
-          <div><p>${address.street} ${address.suite} ${address.city} ${address.zipcode}</p></div>
-          <div>
-            <h3>
-              ${company.name}
-            </h3>
-            <p>${company.catchPhrase}</p>
-            <p>${currentItem.phone}</p>
-            <p>${currentItem.email}</p>
-            <p>${currentItem.website}</p>
-          </div>
-        </div>
-      </div>`;
+      </div>
+    </div>`;
     });
   }
 
-  private updateCardContent(data: any[]): void {
+  private updateCardContent(data: ICards[]): void {
     this.cardFun(data);
     this.contentHolder.innerHTML = this.cardBase;
   }
