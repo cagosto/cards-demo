@@ -41,7 +41,7 @@ class Cards {
 
   constructor(
     contentHolder: HTMLElement,
-    cards: any[],
+    cards: ICards[],
     displayTotal: number = 3
   ) {
     this.displayTotal = displayTotal;
