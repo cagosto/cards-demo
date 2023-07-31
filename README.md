@@ -1,5 +1,3 @@
-# Typescript boilerplate for frontend
+# Typescript Javascript project
 
-This is the source code for my Typescript boilerplate tutorial on my website http://www.ronandoherty.com/blog/typescript-boilerplate-for-frontend
-
-It's a quick and dirty Typescript setup with a dev server and debugging in Chrome and Visual Studio Code.
+Using on open API to play with some typescript sutff.
